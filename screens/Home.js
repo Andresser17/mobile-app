@@ -1,4 +1,11 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+} from "react-native";
+import { useTheme } from "@react-navigation/native";
 // Icons
 import { IoMdOptions } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -8,14 +15,73 @@ import Input from "components/Input";
 // Styles
 import colors from "styles/colors";
 
-function Orders() {
+const DATA = [
+  {
+    id: 1,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 2,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 3,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 5,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 6,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 7,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 8,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 9,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+];
+
+function Order({ data }) {
   return (
     <View style={OrdersStyles.container}>
-      <Text style={OrdersStyles.title}>Created</Text>
-      <Text style={OrdersStyles.subtitle}>Status</Text>
+      <Text style={OrdersStyles.title}>Date: {data.created}</Text>
+      <Text style={OrdersStyles.subtitle}>Status: {data.status}</Text>
       <View style={OrdersStyles.techContainer}>
-        <Text style={OrdersStyles.techText}>Technician</Text>
-        <Text style={OrdersStyles.techText}>Technology</Text>
+        <Text style={OrdersStyles.techText}>{data.technician}</Text>
+        <Text style={OrdersStyles.techText}>{data.technology}</Text>
       </View>
       <TouchableOpacity style={OrdersStyles.dotButton}>
         <BsThreeDotsVertical style={OrdersStyles.dotIcon} />
@@ -64,8 +130,11 @@ const OrdersStyles = StyleSheet.create({
 });
 
 function Home() {
+  const { colors } = useTheme();
+  const renderItem = ({ item }) => <Order data={item} />;
+
   return (
-    <View style={styles.container}>
+    <View style={{ backgroundColor: colors.background, ...styles.container }}>
       <Text style={styles.header}>
         <Text style={styles.subtitle}>Welcome Back</Text>
         John Doe
@@ -83,9 +152,11 @@ function Home() {
           </TouchableOpacity>
         </View>
         {/* orders */}
-        <Orders />
-        <Orders />
-        <Orders />
+        <FlatList
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
       </View>
     </View>
   );

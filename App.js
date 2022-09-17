@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // Components
 import Navbar from "components/Navbar";
@@ -11,11 +11,22 @@ import RegisterTech from "screens/RegisterTech";
 // init navigation
 const Stack = createNativeStackNavigator();
 
+const myTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "rgb(33, 33, 33)",
+  },
+};
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <Navbar />
-      <Stack.Navigator>
+    <NavigationContainer theme={myTheme}>
+      <Stack.Navigator
+        screenOptions={{
+          header: (props) => <Navbar {...props} />,
+        }}
+      >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />

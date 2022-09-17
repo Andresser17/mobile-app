@@ -1,18 +1,24 @@
+import { useState } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 // Icons
 import { BiMenuAltLeft, BiUserCircle } from "react-icons/bi";
 // Styles
 import colors from "styles/colors";
+// Modals
+import Menu from "modals/Menu";
 
-function Navbar() {
+function Navbar({ navigation, route, options, back }) {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => setShowMenu(true)}>
         <BiMenuAltLeft style={styles.menuIcon} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => console.log("open menu")}>
         <BiUserCircle style={styles.userIcon} />
       </TouchableOpacity>
+      <Menu show={showMenu} setShow={setShowMenu} navigation={navigation} />
     </View>
   );
 }
