@@ -26,8 +26,8 @@ function SignIn() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingTop: "4rem",
+    paddingHorizontal: "2rem",
   },
   header: {
     color: `rgba(${colors.primary.text}, 1)`,
@@ -35,17 +35,17 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     marginBottom: "2rem",
   },
-  inputCont: { width: "18rem", marginBottom: "2rem" },
+  inputCont: { marginBottom: "2rem" },
   text: {
     color: `rgba(${colors.primary.text}, 1)`,
     fontSize: "1rem",
     fontWeight: "500",
-    marginTop: "1rem"
+    marginTop: "1rem",
   },
   strongText: {
     color: `rgba(${colors.primary.bg}, 1)`,
     fontWeight: "600",
-  }
+  },
 });
 
 export default SignIn;

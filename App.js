@@ -1,31 +1,31 @@
 import React, { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-// import * as ImagePicker from "expo-image-picker";
-// import * as Sharing from "expo-sharing";
-// import * as ImageManipulator from "expo-image-manipulator";
-// Routes
-import SignIn from "routes/SignIn";
-import SignUp from "routes/SignUp";
-import RegisterTech from "routes/RegisterTech";
+// Screens
+import SignIn from "screens/SignIn";
+import SignUp from "screens/SignUp";
+import RegisterTech from "screens/RegisterTech";
 // Images
 import logo from "./assets/logo.png";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
 
+export default function App() {
   return (
     <View style={styles.container}>
-      <RegisterTech />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "rgba(30, 30, 30, 1)",
-    textColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
   instructions: {
     color: "#888",
