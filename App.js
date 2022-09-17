@@ -1,45 +1,26 @@
-import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+// Components
+import Navbar from "components/Navbar";
 // Screens
+import Home from "screens/Home";
 import SignIn from "screens/SignIn";
 import SignUp from "screens/SignUp";
 import RegisterTech from "screens/RegisterTech";
-// Images
-import logo from "./assets/logo.png";
 
+// init navigation
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </View>
+    <NavigationContainer>
+      <Navbar />
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="RegisterTech" component={RegisterTech} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-  },
-  instructions: {
-    color: "#888",
-    fontSize: 18,
-    marginHorizontal: 15,
-  },
-  logo: {
-    width: 305,
-    height: 159,
-    marginBottom: 20,
-  },
-  thumbnail: {
-    width: 300,
-    height: 300,
-    resizeMode: "contain",
-  },
-});

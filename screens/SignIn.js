@@ -26,6 +26,7 @@ function SignIn() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: `rgba(${colors.primary.bg}, 1)`,
     paddingTop: "4rem",
     paddingHorizontal: "2rem",
   },

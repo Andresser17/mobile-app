@@ -11,6 +11,10 @@ const colors = {
     bg: "209, 216, 224",
     text: "51, 51, 51",
   },
+  dark: {
+    bg: "69, 170, 242",
+    text: "209, 216, 224",
+  },
 };
 
 export default colors;
