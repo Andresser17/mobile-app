@@ -51,7 +51,7 @@ function Menu({ show, setShow, navigation }) {
     <Modal
       animationType="slide"
       visible={show}
-      onRequestClose={() => show((prev) => !prev)}
+      onRequestClose={() => setShow((prev) => !prev)}
     >
       <View style={styles.container}>
         <Pressable style={styles.arrowIcon} onPress={() => setShow(false)}>
