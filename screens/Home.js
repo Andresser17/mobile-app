@@ -5,7 +5,6 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
-import { useTheme } from "@react-navigation/native";
 // Icons
 import { IoMdOptions } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -130,11 +129,10 @@ const OrdersStyles = StyleSheet.create({
 });
 
 function Home() {
-  const { colors } = useTheme();
   const renderItem = ({ item }) => <Order data={item} />;
 
   return (
-    <View style={{ backgroundColor: colors.background, ...styles.container }}>
+    <View style={styles.container}>
       <Text style={styles.header}>
         <Text style={styles.subtitle}>Welcome Back</Text>
         John Doe
@@ -164,6 +162,7 @@ function Home() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
     paddingTop: "4rem",
     paddingHorizontal: "2rem",
   },

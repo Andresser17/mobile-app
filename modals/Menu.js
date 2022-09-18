@@ -1,5 +1,4 @@
 import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
 // Components
 import Button from "components/Button";
 // Icons
@@ -42,11 +41,10 @@ const optionsStyles = StyleSheet.create({
 });
 
 function Menu({ show, setShow, navigation }) {
-  const { colors } = useTheme();
   // options
   const options = [
     { icon: AiOutlineHome, text: "Home", screen: "Home" },
-    { icon: AiOutlineForm, text: "Technician Absence", screen: "SignIn" },
+    { icon: AiOutlineForm, text: "Technician Absence", screen: "TechAbsence" },
   ];
 
   return (
@@ -55,7 +53,7 @@ function Menu({ show, setShow, navigation }) {
       visible={show}
       onRequestClose={() => show((prev) => !prev)}
     >
-      <View style={{ backgroundColor: colors.background, ...styles.container }}>
+      <View style={styles.container}>
         <Pressable style={styles.arrowIcon} onPress={() => setShow(false)}>
           <BsArrowLeft style={styles.arrowIcon} />
         </Pressable>
@@ -72,6 +70,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
+    backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
     padding: "2rem",
   },
   arrowIcon: {

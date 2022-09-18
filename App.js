@@ -7,6 +7,9 @@ import Home from "screens/Home";
 import SignIn from "screens/SignIn";
 import SignUp from "screens/SignUp";
 import RegisterTech from "screens/RegisterTech";
+import TechAbsence from "screens/TechAbsence";
+// Styles
+import colors from "styles/colors";
 
 // init navigation
 const Stack = createNativeStackNavigator();
@@ -14,8 +17,8 @@ const Stack = createNativeStackNavigator();
 const myTheme = {
   ...DefaultTheme,
   colors: {
-    ...DefaultTheme.colors,
-    background: "rgb(33, 33, 33)",
+    ...DefaultTheme,
+    background: `rgba(${colors.tertiary.bg}, 1)`,
   },
 };
 
@@ -27,6 +30,7 @@ export default function App() {
           header: (props) => <Navbar {...props} />,
         }}
       >
+        <Stack.Screen name="TechAbsence" component={TechAbsence} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />

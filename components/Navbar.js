@@ -26,6 +26,7 @@ function Navbar({ navigation, route, options, back }) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
     paddingTop: "2rem",
     paddingHorizontal: "2rem",
     display: "flex",
