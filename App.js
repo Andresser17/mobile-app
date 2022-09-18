@@ -30,11 +30,11 @@ export default function App() {
           header: (props) => <Navbar {...props} />,
         }}
       >
-        <Stack.Screen name="TechAbsence" component={TechAbsence} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="RegisterTech" component={RegisterTech} />
+        <Stack.Screen name="TechAbsence" component={TechAbsence} />
       </Stack.Navigator>
     </NavigationContainer>
   );

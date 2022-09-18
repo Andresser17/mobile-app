@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -11,6 +12,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 // Components
 import Button from "components/Button";
 import Input from "components/Input";
+// Modals
+import OrderDetails from "modals/OrderDetails";
 // Styles
 import colors from "styles/colors";
 
@@ -74,6 +77,8 @@ const DATA = [
 ];
 
 function Order({ data }) {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <View style={OrdersStyles.container}>
       <Text style={OrdersStyles.title}>Date: {data.created}</Text>
@@ -82,9 +87,13 @@ function Order({ data }) {
         <Text style={OrdersStyles.techText}>{data.technician}</Text>
         <Text style={OrdersStyles.techText}>{data.technology}</Text>
       </View>
-      <TouchableOpacity style={OrdersStyles.dotButton}>
+      <TouchableOpacity
+        onPress={() => setShowModal(true)}
+        style={OrdersStyles.dotButton}
+      >
         <BsThreeDotsVertical style={OrdersStyles.dotIcon} />
       </TouchableOpacity>
+      <OrderDetails show={showModal} setShow={setShowModal} />
     </View>
   );
 }
@@ -97,14 +106,15 @@ const OrdersStyles = StyleSheet.create({
     marginBottom: "1rem",
   },
   dotButton: {
+    backgroundColor: `rgba(${colors.primary.text}, 0.5)`,
+    padding: "0.3rem",
+    borderRadius: "50%",
     position: "absolute",
-    top: "1rem",
-    right: "0.5rem",
+    top: "0.4rem",
+    right: "0.4rem",
   },
   dotIcon: {
-    width: "1.5rem",
-    height: "1.5rem",
-    color: `rgba(${colors.secondary.bg}, 1)`,
+    color: `rgba(${colors.primary.bg}, 1)`,
   },
   title: {
     color: `rgba(${colors.secondary.text}, 1)`,
