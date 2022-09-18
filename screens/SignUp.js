@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 // Components
 import Button from "components/Button";
 import Input from "components/Input";
 // Styles
 import colors from "styles/colors";
 
-function SignUp() {
+function SignUp({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Create Account</Text>
@@ -18,7 +18,12 @@ function SignUp() {
       <Button onPress={() => {}} text="Sign Up" />
       <Text style={styles.text}>
         You already have an account?{" "}
-        <Text style={styles.strongText}>Log In</Text>
+        <Pressable
+          onPress={() => navigation.navigate("SignIn")}
+          style={styles.strongText}
+        >
+          <Text>Log In</Text>
+        </Pressable>
       </Text>
     </View>
   );
@@ -40,12 +45,12 @@ const styles = StyleSheet.create({
     color: `rgba(${colors.primary.text}, 1)`,
     fontSize: "1rem",
     fontWeight: "500",
-    marginTop: "1rem"
+    marginTop: "1rem",
   },
   strongText: {
     color: `rgba(${colors.primary.bg}, 1)`,
     fontWeight: "600",
-  }
+  },
 });
 
 export default SignUp;

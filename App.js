@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // Components
@@ -23,6 +24,7 @@ const myTheme = {
 };
 
 export default function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
   return (
     <NavigationContainer theme={myTheme}>
       <Stack.Navigator
@@ -30,11 +32,26 @@ export default function App() {
           header: (props) => <Navbar {...props} />,
         }}
       >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="RegisterTech" component={RegisterTech} />
-        <Stack.Screen name="TechAbsence" component={TechAbsence} />
+        {isSignedIn ? (
+          <>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="RegisterTech" component={RegisterTech} />
+            <Stack.Screen name="TechAbsence" component={TechAbsence} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              options={{ header: () => null }}
+              name="SignIn"
+              component={SignIn}
+            />
+            <Stack.Screen
+              options={{ header: () => null }}
+              name="SignUp"
+              component={SignUp}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
