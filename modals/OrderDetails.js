@@ -1,6 +1,6 @@
 import { Modal, View, Text, Pressable, StyleSheet } from "react-native";
 // Icons
-import { BsArrowLeft } from "react-icons/bs";
+import AntIcon from "react-native-vector-icons/AntDesign";
 // Styles
 import colors from "styles/colors";
 
@@ -13,7 +13,7 @@ const OrderDetails = ({ show, setShow }) => {
     >
       <View style={styles.container}>
         <Pressable style={styles.arrowIcon} onPress={() => setShow(false)}>
-          <BsArrowLeft style={styles.arrowIcon} />
+          <AntIcon name="arrowleft" size={32} style={styles.arrowIcon} />
         </Pressable>
         <View style={styles.wrapper}>
           <Text style={styles.text}>Id: 2</Text>
@@ -36,20 +36,20 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
-    padding: "2rem",
+    padding: 32,
   },
   arrowIcon: {
-    width: "2rem",
-    height: "2rem",
+    width: 32,
+    height: 32,
     color: `rgba(${colors.primary.bg}, 1)`,
   },
   wrapper: {
-    marginTop: "2rem",
+    marginTop: 32,
   },
   text: {
     color: `rgba(${colors.tertiary.text}, 1)`,
-    fontSize: "1.5rem",
-    marginBottom: "1rem",
+    fontSize: 24,
+    marginBottom: 16,
   },
 });
 
