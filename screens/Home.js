@@ -7,10 +7,9 @@ import {
   StyleSheet,
 } from "react-native";
 // Icons
-import { IoMdOptions } from "react-icons/io";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import IonIcon from "react-native-vector-icons/Ionicons";
 // Components
-import Button from "components/Button";
 import Input from "components/Input";
 // Modals
 import OrderDetails from "modals/OrderDetails";
@@ -34,6 +33,13 @@ const DATA = [
   },
   {
     id: 3,
+    created: "12-28-12",
+    status: 0,
+    technician: "John Doe",
+    technology: "UTP",
+  },
+  {
+    id: 4,
     created: "12-28-12",
     status: 0,
     technician: "John Doe",
@@ -67,13 +73,6 @@ const DATA = [
     technician: "John Doe",
     technology: "UTP",
   },
-  {
-    id: 9,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
 ];
 
 function Order({ data }) {
@@ -91,7 +90,11 @@ function Order({ data }) {
         onPress={() => setShowModal(true)}
         style={OrdersStyles.dotButton}
       >
-        <BsThreeDotsVertical style={OrdersStyles.dotIcon} />
+        <EntypoIcon
+          name="dots-three-vertical"
+          size={24}
+          color={`rgba(${colors.secondary.text}, 1)`}
+        />
       </TouchableOpacity>
       <OrderDetails show={showModal} setShow={setShowModal} />
     </View>
@@ -102,39 +105,33 @@ const OrdersStyles = StyleSheet.create({
   container: {
     backgroundColor: `rgba(${colors.primary.bg}, 1)`,
     position: "relative",
-    padding: "1rem",
-    marginBottom: "1rem",
+    padding: 16,
+    marginBottom: 16,
   },
   dotButton: {
-    backgroundColor: `rgba(${colors.primary.text}, 0.5)`,
-    padding: "0.3rem",
-    borderRadius: "50%",
     position: "absolute",
-    top: "0.4rem",
-    right: "0.4rem",
-  },
-  dotIcon: {
-    color: `rgba(${colors.primary.bg}, 1)`,
+    top: 16,
+    right: 6,
   },
   title: {
     color: `rgba(${colors.secondary.text}, 1)`,
-    fontSize: "1rem",
-    fontWeight: 500,
-    marginBottom: "0.2rem",
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 2,
   },
   subtitle: {
     color: `rgba(${colors.secondary.text}, 1)`,
-    fontSize: "0.8rem",
+    fontSize: 12,
   },
   techContainer: {
-    marginTop: "1rem",
+    marginTop: 16,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
   },
   techText: {
     color: `rgba(${colors.secondary.text}, 1)`,
-    fontSize: "0.9rem",
+    fontSize: 15,
   },
 });
 
@@ -143,10 +140,8 @@ function Home() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>
-        <Text style={styles.subtitle}>Welcome Back</Text>
-        John Doe
-      </Text>
+      <Text style={styles.subtitle}>Welcome Back</Text>
+      <Text style={styles.header}>John Doe</Text>
       <View>
         <Text style={styles.ordersTitle}>Service Orders</Text>
         {/* search container */}
@@ -154,9 +149,8 @@ function Home() {
           <View style={styles.inputCont}>
             <Input placeholder="Search" />
           </View>
-
           <TouchableOpacity style={styles.settingsButton}>
-            <IoMdOptions style={styles.settingsIcon} />
+            <IonIcon name="options" size={32} style={styles.settingsIcon} />
           </TouchableOpacity>
         </View>
         {/* orders */}
@@ -173,40 +167,37 @@ function Home() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
-    paddingTop: "4rem",
-    paddingHorizontal: "2rem",
+    paddingVertical: 64,
+    paddingHorizontal: 32,
   },
   header: {
     color: `rgba(${colors.primary.text}, 1)`,
-    fontSize: "2rem",
-    fontWeight: 600,
-    marginBottom: "3rem",
+    fontSize: 32,
+    fontWeight: "600",
+    marginBottom: 48,
   },
   subtitle: {
     color: `rgba(${colors.primary.text}, 0.7)`,
-    fontSize: "1.5rem",
-    fontWeight: 500,
-    display: "block",
+    fontSize: 24,
+    fontWeight: "500",
   },
   ordersTitle: {
     color: `rgba(${colors.primary.text}, 1)`,
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginBottom: "0.5rem",
+    fontSize: 24,
+    fontWeight: "600",
+    marginBottom: 8,
   },
   searchContainer: {
-    marginBottom: "2rem",
+    marginBottom: 32,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   inputCont: { flex: 1 },
   settingsButton: {
-    marginLeft: "1rem",
+    marginLeft: 16,
   },
   settingsIcon: {
-    width: "2.5rem",
-    height: "2.5rem",
     color: `rgba(${colors.primary.text}, 1)`,
   },
 });

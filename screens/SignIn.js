@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 // Components
 import Button from "components/Button";
 import Input from "components/Input";
+// Store
+import { AuthContext } from "store/auth";
 // Services
 import authService from "services/auth.service";
 // Styles
@@ -10,13 +12,18 @@ import colors from "styles/colors";
 
 function SignIn({ navigation }) {
   const [values, setValues] = useState({ email: "", password: "" });
+  const { signIn } = useContext(AuthContext);
 
   const handleInput = (e, name) => {
     setValues((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
   const onSubmit = async () => {
-    const response = await authService.signIn(values.email, values.password);
+    // const response = await authService.signIn(values.email, values.password);
+    const token = "6fb7c6abe81b0699b4f5d9409c0b88f003895968";
+
+    // dispatch token to context store
+    signIn(token);
   };
 
   return (
@@ -46,11 +53,8 @@ function SignIn({ navigation }) {
       <Button onPress={onSubmit} text="Log In" />
       <Text style={styles.text}>
         You don't have an account?{" "}
-        <Pressable
-          onPress={() => navigation.navigate("SignUp")}
-          style={styles.strongText}
-        >
-          <Text>Sign Up</Text>
+        <Pressable onPress={() => navigation.navigate("SignUp")}>
+          <Text style={styles.strongText}>Sign Up</Text>
         </Pressable>
       </Text>
     </View>
@@ -59,21 +63,23 @@ function SignIn({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: "4rem",
-    paddingHorizontal: "2rem",
+    minHeight: "100%",
+    backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
+    paddingTop: 64,
+    paddingHorizontal: 32,
   },
   header: {
     color: `rgba(${colors.primary.text}, 1)`,
-    fontSize: "2rem",
-    fontWeight: 600,
-    marginBottom: "2rem",
+    fontSize: 32,
+    fontWeight: "600",
+    marginBottom: 32,
   },
-  inputCont: { marginBottom: "2rem" },
+  inputCont: { marginBottom: 32 },
   text: {
     color: `rgba(${colors.primary.text}, 1)`,
-    fontSize: "1rem",
+    fontSize: 16,
     fontWeight: "500",
-    marginTop: "1rem",
+    marginTop: 16,
   },
   strongText: {
     color: `rgba(${colors.primary.bg}, 1)`,
