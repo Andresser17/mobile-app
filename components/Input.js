@@ -2,14 +2,15 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 // Styles
 import colors from "styles/colors";
 
-function Input({ label, placeholder, value, onChange }) {
+function Input({ label, placeholder, name, value, onChange, ...props }) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         placeholderTextColor={`rgba(${colors.light.text}, 0.4)`}
         style={styles.input}
-        {...{ placeholder, value, onChange }}
+        onChange={(e) => onChange(e, name)}
+        {...{ placeholder, value, ...props }}
       />
     </View>
   );
