@@ -1,21 +1,49 @@
+import { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 // Components
 import Button from "components/Button";
 import Input from "components/Input";
+// Services
+import authService from "services/auth.service";
 // Styles
 import colors from "styles/colors";
 
 function SignIn({ navigation }) {
+  const [values, setValues] = useState({ email: "", password: "" });
+
+  const handleInput = (e, name) => {
+    setValues((prev) => ({ ...prev, [name]: e.target.value }));
+  };
+
+  const onSubmit = async () => {
+    const response = await authService.signIn(values.email, values.password);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Sign In</Text>
       <View style={styles.inputCont}>
-        <Input label="Email" placeholder="Write your email" />
+        <Input
+          name="email"
+          value={values.email}
+          onChange={handleInput}
+          label="Email"
+          placeholder="Write your email"
+          keyboardType="email-address"
+        />
       </View>
       <View style={styles.inputCont}>
-        <Input label="Password" placeholder="Password" />
+        <Input
+          name="password"
+          value={values.password}
+          onChange={handleInput}
+          label="Password"
+          placeholder="Password"
+          keyboardType="phone-pad"
+          secureTextEntry
+        />
       </View>
-      <Button onPress={() => {}} text="Log In" />
+      <Button onPress={onSubmit} text="Log In" />
       <Text style={styles.text}>
         You don't have an account?{" "}
         <Pressable
