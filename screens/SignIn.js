@@ -19,11 +19,10 @@ function SignIn({ navigation }) {
   };
 
   const onSubmit = async () => {
-    // const response = await authService.signIn(values.email, values.password);
-    const token = "6fb7c6abe81b0699b4f5d9409c0b88f003895968";
+    const response = await authService.signIn(values.email, values.password);
 
     // dispatch token to context store
-    signIn(token);
+    signIn(response);
   };
 
   return (

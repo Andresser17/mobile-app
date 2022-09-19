@@ -8,8 +8,8 @@ import Navbar from "components/Navbar";
 import Home from "screens/Home";
 import SignIn from "screens/SignIn";
 import SignUp from "screens/SignUp";
-// import RegisterTech from "screens/RegisterTech";
-// import TechAbsence from "screens/TechAbsence";
+import RegisterTech from "screens/RegisterTech";
+import TechAbsence from "screens/TechAbsence";
 // Store
 import { AuthContext, authReducer, authActions } from "store/auth";
 // Styles
@@ -33,24 +33,24 @@ export default function App() {
     isLoading: false,
   });
 
-  // useEffect(() => {
-  //   // Fetch the token from storage then navigate to our appropriate place
-  //   const bootstrapAsync = async () => {
-  //     let userToken;
+  useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+    const bootstrapAsync = async () => {
+      let userToken;
 
-  //     try {
-  //       userToken = await SecureStore.getItemAsync("userToken");
-  //     } catch (e) {
-  //       // Restoring token failed
-  //     }
-  //     console.log({userToken});
-  //     dispatch({ type: "RESTORE_TOKEN", token: userToken });
-  //   };
+      try {
+        userToken = await SecureStore.getItemAsync("userToken");
+      } catch (e) {
+        // Restoring token failed
+        console.log(e);
+      }
+      dispatch({ type: "RESTORE_TOKEN", token: userToken });
+    };
 
-  //   bootstrapAsync();
-  // }, []);
+    bootstrapAsync();
+  }, []);
 
-  const authContext = React.useMemo(authActions, []);
+  const authContext = React.useMemo(() => authActions(dispatch), []);
 
   return (
     <AuthContext.Provider value={authContext}>
@@ -60,11 +60,11 @@ export default function App() {
             header: (props) => <Navbar {...props} />,
           }}
         >
-          {false ? (
+          {state.isLogged ? (
             <>
               <Stack.Screen name="Home" component={Home} />
-              {/* <Stack.Screen name="RegisterTech" component={RegisterTech} /> */}
-              {/* <Stack.Screen name="TechAbsence" component={TechAbsence} /> */}
+              <Stack.Screen name="RegisterTech" component={RegisterTech} />
+              <Stack.Screen name="TechAbsence" component={TechAbsence} />
             </>
           ) : (
             <>

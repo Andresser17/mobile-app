@@ -29,17 +29,18 @@ function RegisterTech() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingVertical: "4rem",
+    backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
+    paddingVertical: 64,
+    paddingHorizontal: 32,
   },
   header: {
-    width: "12rem",
+    width: 192,
     color: `rgba(${colors.primary.text}, 1)`,
-    fontSize: "2rem",
-    fontWeight: 600,
-    marginBottom: "2rem",
+    fontSize: 32,
+    fontWeight: "600",
+    marginBottom: 32,
   },
-  inputCont: { width: "18rem", marginBottom: "2rem" },
+  inputCont: { marginBottom: 32 },
 });
 
 export default RegisterTech;

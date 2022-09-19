@@ -21,12 +21,13 @@ const TechAbsence = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    minHeight: "100%",
     backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
-    padding: "2rem",
+    padding: 32,
   },
   inputCont: {
-    marginTop: "2rem",
-    marginBottom: "1.5rem",
+    marginTop: 32,
+    marginBottom: 24,
   },
 });
 

@@ -1,8 +1,14 @@
+import { useContext } from "react";
 import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
 // Components
 import Button from "components/Button";
 // Icons
 import AntIcon from "react-native-vector-icons/AntDesign";
+import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+// Store
+import { AuthContext } from "store/auth";
+// Services
+import authService from "services/auth.service.js";
 // Styles
 import colors from "styles/colors";
 
@@ -39,6 +45,7 @@ const optionsStyles = StyleSheet.create({
 });
 
 function Menu({ show, setShow, navigation }) {
+  const { signOut } = useContext(AuthContext);
   // options
   const options = [
     {
@@ -54,6 +61,17 @@ function Menu({ show, setShow, navigation }) {
     },
     {
       icon: (
+        <MaterialIcon
+          name="form-select"
+          size={32}
+          style={{ marginRight: 16, color: `rgba(${colors.primary.text}, 1)` }}
+        />
+      ),
+      text: "Register Technician",
+      screen: "RegisterTech",
+    },
+    {
+      icon: (
         <AntIcon
           name="form"
           size={32}
@@ -64,6 +82,13 @@ function Menu({ show, setShow, navigation }) {
       screen: "TechAbsence",
     },
   ];
+
+  const handleSignOut = async () => {
+    const response = await authService.signOut();
+
+    // remove token from store
+    signOut();
+  };
 
   return (
     <Modal
@@ -78,7 +103,7 @@ function Menu({ show, setShow, navigation }) {
         <View style={styles.wrapper}>
           <Options {...{ options, setShow, navigation }} />
         </View>
-        <Button onPress={() => console.log("hello")} text="Log Out" />
+        <Button onPress={handleSignOut} text="Log Out" />
       </View>
     </Modal>
   );
