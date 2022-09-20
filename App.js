@@ -53,7 +53,8 @@ export default function App() {
       }
       console.log({ userToken });
       console.log({ isLoading: state.isLoading });
-      dispatch({ type: "RESTORE_TOKEN", token: userToken });
+      if (userToken) dispatch({ type: "RESTORE_TOKEN", token: userToken });
+      else dispatch({ type: "SIGN_OUT" });
     };
 
     bootstrapAsync();

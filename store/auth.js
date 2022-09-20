@@ -13,12 +13,14 @@ export const authReducer = (prevState, action) => {
       return {
         ...prevState,
         isLogged: true,
+        isLoading: false,
         userToken: action.token,
       };
     case "SIGN_OUT":
       return {
         ...prevState,
         isLogged: false,
+        isLoading: false,
         userToken: null,
       };
   }

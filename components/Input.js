@@ -17,7 +17,7 @@ function Input({
         placeholderTextColor={`rgba(${colors.light.text}, 0.4)`}
         style={styles.input}
         onChange={(e) => onChange(e, name)}
-        {...{ placeholder, value, ...props }}
+        {...{ placeholder, value: value || "", ...props }}
       />
     </View>
   );

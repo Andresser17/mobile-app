@@ -15,7 +15,7 @@ function SignIn({ navigation }) {
   const { signIn } = useContext(AuthContext);
 
   const handleInput = (e, name) => {
-    setValues((prev) => ({ ...prev, [name]: e.target.value }));
+    setValues((prev) => ({ ...prev, [name]: e.nativeEvent.text }));
   };
 
   const onSubmit = async () => {
