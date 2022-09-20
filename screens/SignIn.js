@@ -22,7 +22,12 @@ function SignIn({ navigation }) {
     const response = await authService.signIn(values.email, values.password);
 
     // dispatch token to context store
-    signIn(response);
+    if (response.status === 200) {
+      signIn(response);
+      return;
+    }
+
+    alert(response.response.data.mensaje);
   };
 
   return (
@@ -45,8 +50,7 @@ function SignIn({ navigation }) {
           onChange={handleInput}
           label="Password"
           placeholder="Password"
-          keyboardType="phone-pad"
-          secureTextEntry
+          secureTextEntry={true}
         />
       </View>
       <Button onPress={onSubmit} text="Log In" />

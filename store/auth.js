@@ -6,6 +6,7 @@ export const authReducer = (prevState, action) => {
       return {
         ...prevState,
         userToken: action.token,
+        isLogged: true,
         isLoading: false,
       };
     case "SIGN_IN":

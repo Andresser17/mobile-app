@@ -35,7 +35,12 @@ function SignUp({ navigation }) {
     );
 
     // dispatch token to context store
-    signUp(response);
+    if (response.status === 200) {
+      signUp(response);
+      return;
+    }
+
+    alert(response.response.data.mensaje);
   };
 
   return (

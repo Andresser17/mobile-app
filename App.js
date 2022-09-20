@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
+import { View, Text } from "react-native";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SecureStore from "expo-secure-store";
@@ -26,11 +27,17 @@ const myTheme = {
   },
 };
 
+const Loading = () => (
+  <View>
+    <Text>loading</Text>
+  </View>
+);
+
 export default function App() {
   const [state, dispatch] = useReducer(authReducer, {
     isLogged: false,
     userToken: null,
-    isLoading: false,
+    isLoading: true,
   });
 
   useEffect(() => {
@@ -44,6 +51,8 @@ export default function App() {
         // Restoring token failed
         console.log(e);
       }
+      console.log({ userToken });
+      console.log({ isLoading: state.isLoading });
       dispatch({ type: "RESTORE_TOKEN", token: userToken });
     };
 
@@ -60,6 +69,9 @@ export default function App() {
             header: (props) => <Navbar {...props} />,
           }}
         >
+          {state.isLoading && (
+            <Stack.Screen name="Loading" component={Loading} />
+          )}
           {state.isLogged ? (
             <>
               <Stack.Screen name="Home" component={Home} />
