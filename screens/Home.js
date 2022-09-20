@@ -141,8 +141,8 @@ function Home() {
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>Welcome Back</Text>
-      <Text style={styles.header}>John Doe</Text>
-      <View>
+      <Text style={styles.heading}>John Doe</Text>
+      <View style={styles.wrapper}>
         <Text style={styles.ordersTitle}>Service Orders</Text>
         {/* search container */}
         <View style={styles.searchContainer}>
@@ -166,21 +166,25 @@ function Home() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    minHeight: "100%",
     backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
-    paddingVertical: 64,
+    paddingTop: 64,
+    paddingBottom: 128,
     paddingHorizontal: 32,
-  },
-  header: {
-    color: `rgba(${colors.primary.text}, 1)`,
-    fontSize: 32,
-    fontWeight: "600",
-    marginBottom: 48,
   },
   subtitle: {
     color: `rgba(${colors.primary.text}, 0.7)`,
     fontSize: 24,
     fontWeight: "500",
   },
+  heading: {
+    color: `rgba(${colors.primary.text}, 1)`,
+    fontSize: 32,
+    fontWeight: "600",
+    marginBottom: 48,
+  },
+  wrapper: { flex: 1 },
   ordersTitle: {
     color: `rgba(${colors.primary.text}, 1)`,
     fontSize: 24,

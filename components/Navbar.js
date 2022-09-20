@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 // Icons
 import IonIcon from "react-native-vector-icons/Ionicons";
 import FontIcon from "react-native-vector-icons/FontAwesome";
