@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,82 +13,30 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 import Input from "components/Input";
 // Modals
 import OrderDetails from "modals/OrderDetails";
+// Services
+import userService from "services/user.service";
 // Styles
 import colors from "styles/colors";
-
-const DATA = [
-  {
-    id: 1,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-  {
-    id: 2,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-  {
-    id: 3,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-  {
-    id: 4,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-  {
-    id: 5,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-  {
-    id: 6,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-  {
-    id: 7,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-  {
-    id: 8,
-    created: "12-28-12",
-    status: 0,
-    technician: "John Doe",
-    technology: "UTP",
-  },
-];
 
 function Order({ data }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <View style={OrdersStyles.container}>
-      <Text style={OrdersStyles.title}>Date: {data.created}</Text>
-      <Text style={OrdersStyles.subtitle}>Status: {data.status}</Text>
-      <View style={OrdersStyles.techContainer}>
-        <Text style={OrdersStyles.techText}>{data.technician}</Text>
-        <Text style={OrdersStyles.techText}>{data.technology}</Text>
+    <View style={OrderStyles.container}>
+      <View style={OrderStyles.titleCont}>
+        <Text style={OrderStyles.title}>Creation Date:</Text>
+        <Text style={OrderStyles.title}>{data.created}</Text>
+      </View>
+      <Text style={OrderStyles.subtitle}>Status: {data.status}</Text>
+      <View style={OrderStyles.techContainer}>
+        <Text style={OrderStyles.techText}>
+          Technician ID: {data.technician}
+        </Text>
+        <Text style={OrderStyles.techText}>Tech: {data.technology}</Text>
       </View>
       <TouchableOpacity
         onPress={() => setShowModal(true)}
-        style={OrdersStyles.dotButton}
+        style={OrderStyles.dotButton}
       >
         <EntypoIcon
           name="dots-three-vertical"
@@ -101,7 +49,7 @@ function Order({ data }) {
   );
 }
 
-const OrdersStyles = StyleSheet.create({
+const OrderStyles = StyleSheet.create({
   container: {
     backgroundColor: `rgba(${colors.primary.bg}, 1)`,
     position: "relative",
@@ -113,15 +61,17 @@ const OrdersStyles = StyleSheet.create({
     top: 16,
     right: 6,
   },
+  titleCont: {
+    marginBottom: 2,
+  },
   title: {
     color: `rgba(${colors.secondary.text}, 1)`,
     fontSize: 16,
     fontWeight: "500",
-    marginBottom: 2,
   },
   subtitle: {
     color: `rgba(${colors.secondary.text}, 1)`,
-    fontSize: 12,
+    fontSize: 14,
   },
   techContainer: {
     marginTop: 16,
@@ -136,7 +86,32 @@ const OrdersStyles = StyleSheet.create({
 });
 
 function Home() {
+  const [orders, setOrders] = useState([]);
+  const [error, setError] = useState(null);
   const renderItem = ({ item }) => <Order data={item} />;
+
+  // get orders
+  useEffect(() => {
+    const getOrders = async () => {
+      if (orders.length === 0 && error === null) {
+        const response = await userService.getOrders();
+
+        if (response.status === 200) {
+          console.log(response.data);
+          setOrders(response.data);
+          return;
+        }
+
+        // if failed request, set error
+        setError({
+          status: response.status,
+          message: response.response.data.mensaje,
+        });
+      }
+    };
+
+    getOrders();
+  }, [orders, error]);
 
   return (
     <View style={styles.container}>
@@ -155,9 +130,9 @@ function Home() {
         </View>
         {/* orders */}
         <FlatList
-          data={DATA}
+          data={orders}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.ID}
         />
       </View>
     </View>
