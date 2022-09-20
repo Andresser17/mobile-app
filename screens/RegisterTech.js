@@ -1,34 +1,81 @@
+import { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 // Components
 import Navbar from "components/Navbar";
 import Button from "components/Button";
 import Input from "components/Input";
+// Services
+import userService from "services/user.service";
 // Styles
 import colors from "styles/colors";
 
 function RegisterTech() {
+  const [values, setValues] = useState({
+    name: "",
+    last_name: "",
+    birthday: "",
+  });
+
+  const handleInput = (e, name) => {
+    setValues((prev) => ({ ...prev, [name]: e.nativeEvent.text }));
+  };
+
+  const onSubmit = async () => {
+    const response = await userService.registerTech(
+      values.name,
+      values.last_name,
+      values.birthday
+    );
+
+    if (response.status === 201) {
+      alert("Technician Created");
+
+      // clear form
+      setValues({ name: "", last_name: "", birthday: "" });
+      return;
+    }
+
+    alert("Request Error");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Register a Technician</Text>
       <View style={styles.inputCont}>
-        <Input label="Name" placeholder="Name" />
+        <Input
+          name="name"
+          value={values.name}
+          onChange={handleInput}
+          label="Name"
+          placeholder="Name"
+        />
       </View>
       <View style={styles.inputCont}>
-        <Input label="Last Name" placeholder="Last Name" />
+        <Input
+          name="last_name"
+          value={values.last_name}
+          onChange={handleInput}
+          label="Last Name"
+          placeholder="Last Name"
+        />
       </View>
       <View style={styles.inputCont}>
-        <Input label="Birthday" placeholder="Birthday" />
+        <Input
+          name="birthday"
+          value={values.birthday}
+          onChange={handleInput}
+          label="Birthday"
+          placeholder="YYYY-MM-DD"
+        />
       </View>
-      <View style={styles.inputCont}>
-        <Input label="Status" placeholder="Status" />
-      </View>
-      <Button onPress={() => {}} text="Register" />
+      <Button onPress={onSubmit} text="Register" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    minHeight: "100%",
     backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
     paddingVertical: 64,
     paddingHorizontal: 32,

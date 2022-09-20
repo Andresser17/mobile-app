@@ -97,7 +97,6 @@ function Home() {
         const response = await userService.getOrders();
 
         if (response.status === 200) {
-          console.log(response.data);
           setOrders(response.data);
           return;
         }
