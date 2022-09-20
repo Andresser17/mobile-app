@@ -44,7 +44,7 @@ function Order({ data }) {
           color={`rgba(${colors.secondary.text}, 1)`}
         />
       </TouchableOpacity>
-      <OrderDetails show={showModal} setShow={setShowModal} />
+      <OrderDetails data={data} show={showModal} setShow={setShowModal} />
     </View>
   );
 }

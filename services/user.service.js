@@ -19,8 +19,24 @@ async function getOrders() {
   }
 }
 
+async function getOrderDetails(orderId) {
+  try {
+    // get token from SecureStore
+    const userToken = await SecureStore.getItemAsync("userToken");
+    // set token in request header
+    axios.defaults.headers.common["Authorization"] = `token ${userToken}`;
+    const response = await axios.get(`${API_URL}/os/${orderId}/`);
+
+    return response;
+  } catch (e) {
+    console.log(e.message);
+    return e;
+  }
+}
+
 const user = {
   getOrders,
+  getOrderDetails,
 };
 
 export default user;

@@ -1,10 +1,17 @@
-import { Modal, View, Text, Pressable, StyleSheet } from "react-native";
+import {
+  Modal,
+  View,
+  ScrollView,
+  Text,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 // Icons
 import AntIcon from "react-native-vector-icons/AntDesign";
 // Styles
 import colors from "styles/colors";
 
-const OrderDetails = ({ show, setShow }) => {
+const OrderDetails = ({ data, show, setShow }) => {
   return (
     <Modal
       animationType="slide"
@@ -15,17 +22,25 @@ const OrderDetails = ({ show, setShow }) => {
         <Pressable style={styles.arrowIcon} onPress={() => setShow(false)}>
           <AntIcon name="arrowleft" size={32} style={styles.arrowIcon} />
         </Pressable>
-        <View style={styles.wrapper}>
-          <Text style={styles.text}>Id: 2</Text>
-          <Text style={styles.text}>Deleted: false</Text>
-          <Text style={styles.text}>Created: 2022-08-29</Text>
-          <Text style={styles.text}>Updated: 2022-08-29</Text>
-          <Text style={styles.text}>Status: 0</Text>
-          <Text style={styles.text}>Technology: ONT</Text>
-          <Text style={styles.text}>Plan: 20Mb</Text>
-          <Text style={styles.text}>Scheduled Date Init: null</Text>
-          <Text style={styles.text}>User Id: 2</Text>
-        </View>
+        <ScrollView style={styles.wrapper}>
+          <Text style={styles.text}>Id: {data.ID}</Text>
+          <Text style={styles.text}>Deleted: {data.deleted}</Text>
+          <Text style={styles.text}>Created: {data.created}</Text>
+          <Text style={styles.text}>Updated: {data.updated}</Text>
+          <Text style={styles.text}>Status: {data.status}</Text>
+          <Text style={styles.text}>Technology: {data.technology}</Text>
+          <Text style={styles.text}>Plan: {data.plan}</Text>
+          <Text style={styles.text}>User Id: {data["user_id"]}</Text>
+          <Text style={styles.text}>
+            Scheduled Date Init: {data["scheduled_date_init"]}
+          </Text>
+          <Text style={styles.text}>Creator: {data.creator}</Text>
+          <Text style={styles.text}>Updater: {data.updater}</Text>
+          <Text style={styles.text}>Technician: {data.technician}</Text>
+          <Text style={styles.text}>OS Type: {data.ostype}</Text>
+          <Text style={styles.text}>Category: {data.category}</Text>
+          <Text style={styles.text}>Operator: {data.operator}</Text>
+        </ScrollView>
       </View>
     </Modal>
   );
@@ -33,10 +48,11 @@ const OrderDetails = ({ show, setShow }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: "100%",
     height: "100%",
     backgroundColor: `rgba(${colors.tertiary.bg}, 1)`,
-    padding: 32,
+    padding: 16,
   },
   arrowIcon: {
     width: 32,
@@ -44,6 +60,7 @@ const styles = StyleSheet.create({
     color: `rgba(${colors.primary.bg}, 1)`,
   },
   wrapper: {
+    flex: 1,
     marginTop: 32,
   },
   text: {
