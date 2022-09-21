@@ -34,12 +34,14 @@ async function getOrderDetails(orderId) {
   }
 }
 
-async function registerTech(name, last_name, birthday) {
-  // name = "Alejandro";
-  // last_name = "Serrano";
-  // birthday = "2022-12-21";
-  const idNumber = `${name.slice(0, 2)}${last_name.slice(0, 2)}${birthday}`;
-
+async function registerTech(
+  name,
+  last_name,
+  birthday,
+  status,
+  id_type,
+  id_number
+) {
   try {
     // get token from SecureStore
     const userToken = await SecureStore.getItemAsync("userToken");
@@ -49,9 +51,30 @@ async function registerTech(name, last_name, birthday) {
       name,
       last_name,
       birthday,
-      status: 0,
-      id_type: 0,
-      id_number: idNumber,
+      status,
+      id_type,
+      id_number,
+      operator: 1,
+    });
+
+    return response;
+  } catch (e) {
+    console.log(e.message);
+    return e;
+  }
+}
+
+async function techAbsence(schedule_day, status, start_time, end_time) {
+  try {
+    // get token from SecureStore
+    const userToken = await SecureStore.getItemAsync("userToken");
+    // set token in request header
+    axios.defaults.headers.common["Authorization"] = `token ${userToken}`;
+    const response = await axios.post(`${API_URL}/absence/`, {
+      schedule_day: Number(schedule_day),
+      status: Number(status),
+      start_time,
+      end_time,
       operator: 1,
     });
 
@@ -66,6 +89,7 @@ const user = {
   getOrders,
   getOrderDetails,
   registerTech,
+  techAbsence,
 };
 
 export default user;
