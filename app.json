@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash-screen.png",
       "resizeMode": "contain",
@@ -14,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -33,7 +31,8 @@
     "extra": {
       "eas": {
         "projectId": "6223a929-b899-4da9-ab6a-ad2bf05a268d"
-      }
+      },
+      "API_URL": "https://brujula.development.multifiberapp.com/api/v1"
     }
   }
 }

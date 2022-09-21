@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SecureStore from "expo-secure-store";
@@ -11,6 +11,7 @@ import SignIn from "screens/SignIn";
 import SignUp from "screens/SignUp";
 import RegisterTech from "screens/RegisterTech";
 import TechAbsence from "screens/TechAbsence";
+import Loading from "screens/Loading";
 // Store
 import { AuthContext, authReducer, authActions } from "store/auth";
 // Styles
@@ -26,12 +27,6 @@ const myTheme = {
     background: `rgba(${colors.tertiary.bg}, 1)`,
   },
 };
-
-const Loading = () => (
-  <View>
-    <Text>loading</Text>
-  </View>
-);
 
 export default function App() {
   const [state, dispatch] = useReducer(authReducer, {
@@ -51,8 +46,7 @@ export default function App() {
         // Restoring token failed
         console.log(e);
       }
-      console.log({ userToken });
-      console.log({ isLoading: state.isLoading });
+
       if (userToken) dispatch({ type: "RESTORE_TOKEN", token: userToken });
       else dispatch({ type: "SIGN_OUT" });
     };
@@ -71,7 +65,11 @@ export default function App() {
           }}
         >
           {state.isLoading && (
-            <Stack.Screen name="Loading" component={Loading} />
+            <Stack.Screen
+              options={{ header: () => null }}
+              name="Loading"
+              component={Loading}
+            />
           )}
           {state.isLogged ? (
             <>

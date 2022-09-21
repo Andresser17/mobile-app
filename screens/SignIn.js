@@ -40,7 +40,6 @@ function SignIn({ navigation }) {
           onChange={handleInput}
           label="Email"
           placeholder="Write your email"
-          keyboardType="email-address"
         />
       </View>
       <View style={styles.inputCont}>

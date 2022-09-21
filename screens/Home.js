@@ -85,7 +85,7 @@ const OrderStyles = StyleSheet.create({
   },
 });
 
-function Home() {
+function Home({ onLayout }) {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
   const renderItem = ({ item }) => <Order data={item} />;
@@ -113,7 +113,7 @@ function Home() {
   }, [orders, error]);
 
   return (
-    <View style={styles.container}>
+    <View {...{ onLayout }} style={styles.container}>
       <Text style={styles.subtitle}>Welcome Back</Text>
       <Text style={styles.heading}>John Doe</Text>
       <View style={styles.wrapper}>
